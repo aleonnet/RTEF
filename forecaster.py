@@ -1,8 +1,8 @@
 """
 Project:      Real Time Energy Consumption Forecasting System
 Program:      forecaster.py
-Description:  Program to calculate forecast for energy consumption from MQTT stream 
-              determined using a polynomial and publish the forecast to a new stream. 
+Description:  Program to calculate forecast of energy consumption from an MQTT topic 
+              determined using a polynomial and publish the forecast to a new topic. 
 Made by:      Eirik Johannes Ramstad
 Date:         28.08.2017
 """

@@ -1,7 +1,7 @@
 """
 Project:        Real Time Energy Consumption Forecasting System
 Program:        publisher.py
-Description:    Program to publish energy consumption data to a locally hosted MQTT server
+Description:    Program to publish energy consumption data to a locally hosted MQTT broker
 Made by:        Eirik Johannes Ramstad
 Date:           28.08.2017
 
