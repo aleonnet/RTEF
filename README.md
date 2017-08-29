@@ -2,7 +2,7 @@
 
 ## Description
 
-The purpose of this application is to present a simple way to forecast future energy consumption based on a stream of MQTT data received from an electricity meter. The forecasted electricity consumption can then be used by a utility provider to better manage their electricity production. A better matched production vs. demand reduces the volatility of the electricity price, ultimately making electricity cheaper for the consumer. 
+The purpose of this application is to present a simple way to forecast future energy consumption based on a stream of MQTT data received from an electricity meter. The forecasted electricity consumption can then be used by a utility provider to better manage their electricity production. A better matched production vs. demand reduces the volatility of the electricity price, ultimately making electricity cheaper and more reliable for the consumer. 
 
 
 ### How does it work?
@@ -22,17 +22,17 @@ The incoming data from the electricity meter is formatted using json and consist
 
 * Add  time, weekday, date, temperature and daylight/weather-type variables to improve accuracy of a consumers forecast. 
 
-* Use machine learning techniques on historic data from a large set of consumers to segment consumers based on their demand pattern, then develop models for each segment incorporating variables relevant to it. 
+* Use machine learning techniques on historic data from a large set of consumers to segment consumers based on their demand pattern, then develop models for each segment using variables relevant to it. 
 
 
 ## Getting Started
 
 ### Prerequisites
 
-For the forecaster to work, ensure that you use an appropriate computer with all the required dependencies installed. The Real Time Energy Forecaster was tested on a Fedora based Linux distribution using Python 2.7. The required dependencies can be found in the includes section of the programs.   
+For the forecaster to work, ensure that you use an appropriate computer with all the required dependencies installed. The Real Time Energy Forecaster was tested on a Fedora based Linux distribution using Python 2.7. The required dependencies can be found in the includes section of the programs. The Mosquitto message broker also needs to be installed.    
 
 
-### Setting up local MQTT broker and subscriber
+### Setting up a local MQTT broker and subscriber
 
 Start a local mosquitto broker by entering the following command into a terminal window:
 ```
