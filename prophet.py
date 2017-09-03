@@ -12,7 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 
 def dataset1():
-    df = pd.read_csv('Apt1_2015.csv', parse_dates=['ds'])
+    df = pd.read_csv('datasets/Apt1_2015.csv', parse_dates=['ds'])
 
     # Lowest granularity supported by prophet is days, so format data into days
     df = df.reset_index().set_index('ds').groupby(pd.TimeGrouper("d")).sum()
@@ -24,7 +24,7 @@ def dataset1():
     return df
 
 def dataset2():
-    data = pd.read_csv('household_power_consumption.csv', parse_dates=[['Date', 'Time']])
+    data = pd.read_csv('datasets/household_power_consumption.csv', parse_dates=[['Date', 'Time']])
     
     # Keep only relevant columns and format to what prophet expects
     df = data[['Date_Time','Global_active_power']]
