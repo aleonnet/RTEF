@@ -3,7 +3,7 @@ Project:      Real Time Energy Consumption Forecasting System
 Program:      prophet.py
 Description:  
 Made by:      Eirik Johannes Ramstad
-Date:         28.08.2017
+Date:         03.09.2017
 """
 
 from fbprophet import Prophet
@@ -11,12 +11,11 @@ import pandas as pd
 import numpy as np
 
 
-data = pd.read_csv('household_electricity_consumption.csv', parse_dates=[['Date', 'Time']])
+data = pd.read_csv('household_power_consumption_short.csv', parse_dates=[['Date', 'Time']])
 
-# Keep only relevant columns and rename to what prophet expects
-
-Global_active_power = data['time', 'Global_active_power']
-df = Global_active_power.rename(columns={'time': 'df', 'Global_active_power': 'y'})
+# Keep only relevant columns and format to what prophet expects
+df = data[['Date_Time','Global_active_power']]
+df = df.rename(columns={'Date_Time': 'ds', 'Global_active_power': 'y'})
 
 # Analyse data with prophet
 m = Prophet()
@@ -33,4 +32,4 @@ forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail()
 m.plot(forecast);
 
 # Plot Components will show the trend, yearly seasonality, weekly seasonality, 
-m.plot_components(forecast);
+#m.plot_components(forecast)
