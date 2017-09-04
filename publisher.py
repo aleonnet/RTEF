@@ -13,25 +13,22 @@ import time
 import datetime
 import numpy
 import subprocess
+import pandas as pd
 
-# Test datasets
-data2 = numpy.arange(0,20)
-data1 = [0,1,4,9,16,25,36,49,64,81,100,11*11,12*12,13*13,14*14,15*15,14*14,13*13,12*12,11*11,100,81,64,49,36,25,16,9,4,1]
 
-# Send 60 packets
-for x in range(0,60):
-	# Get time
-    now = datetime.datetime.now()
-    timeString = now.strftime("%d.%m.%Y %H:%M:%S")
+df = pd.read_csv('datasets/nordic_electricity_consumption_nordpool.csv')#, parse_dates=['Date'])
 
-    data1 = numpy.roll(data1,-1)
+for index, row in df.iterrows():
+    
+    pydict = {'timestamp':row['Date'], 'value':row['NO']} 
 
-    pydict = {'timestamp':timeString, 'value':data1[0]}    
     dict2json = json.dumps(pydict)
 
     command = "mosquitto_pub -t 'meters/test-01' -m '"+ str(dict2json) +"'"
     subprocess.check_output(["bash", '-c',command])
 
-    print(timeString + ' -- Data sent!')
+    print(row['Date'] + ' -- Data sent!')
     time.sleep(1)
+
+
 

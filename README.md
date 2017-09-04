@@ -11,10 +11,12 @@ The forecaster listens to a specified MQTT topic, calculates a forecast based on
 
 The publisher has been made to simulate an electricity meter. It takes datapoints from a dataset and publishes it to an MQTT topic at a given time interval. 
 
-The incoming data from the electricity meter is formatted using json and consists of a timestamp and value field. The output data from the forecaster is also formatted using json and consists of the future timestamp and future value.  
+The incoming data from the electricity meter is formatted using json and consists of a timestamp and value field. The output data from the forecaster is also formatted using json and consists of the future timestamp and future value.
 
 
 ### Future improvements
+
+* Implement prophet model into forecaster 
 
 * Create a function to determine the accuracy of the forecast by comparing with actual data. 
 
@@ -25,12 +27,12 @@ The incoming data from the electricity meter is formatted using json and consist
 
 ### Prerequisites
 
-For the forecaster to work, ensure that an appropriate computer with all the required dependencies installed is used. The Real Time Energy Forecaster has been tested using Python 2.7 on a computer running Ubuntu. The required dependencies can be found in the includes section of the programs. The Mosquitto message broker also needs to be installed.    
+For the forecaster to work, ensure that an appropriate computer with all the required dependencies installed is used. The Real Time Energy Forecaster has been tested using Python 2.7 on a computer running Ubuntu. The required dependencies can be found in the includes section of the programs. The Mosquitto message broker and clients also needs to be installed.
 
 
 ### Setting up a local MQTT broker and subscriber
 
-Start a local mosquitto broker by entering the following command into a terminal window:
+Start a local mosquitto broker by entering the following command into a terminal window. Note, on some operating systems, this might not be necessary as it is already running in the background. 
 ```
 $ mosquitto
 ```
@@ -55,7 +57,7 @@ The publisher app can be used to test the forecasting application. The publisher
 ```
 $ python publisher.py
 ```
-A later release will include a function for evaluatating the acuracy of the forecasts to make it easier to determine the accuracy of the forecast and select the most suitable model for a given demand pattern.  
+A later release will include a function for evaluatating the acuracy of the forecasts to make it easier to determine the accuracy of the forecast and select the most suitable model for a given demand pattern.
 
 The dataset has been sourced from [Nordpool](http://www.nordpoolspot.com) and contains daily sums of electric power consumption across the Nordic region from January 2013 to September 2017. 
 

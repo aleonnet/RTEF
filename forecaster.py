@@ -13,7 +13,6 @@ import paho.mqtt.publish as publish
 import json
 import numpy
 import time
-import pylab
 import datetime
 
 # Global Variables

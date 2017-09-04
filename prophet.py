@@ -13,7 +13,6 @@ import numpy as np
 import matplotlib.pyplot as plt 
 
 # Functions to read csv and format dataframe into supported format
-
 def nordpool():
     df = pd.read_csv('datasets/nordic_electricity_consumption_nordpool.csv', parse_dates=['Date'])
     
