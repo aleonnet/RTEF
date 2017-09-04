@@ -1,7 +1,8 @@
 """
 Project:      Real Time Energy Consumption Forecasting System
 Program:      prophet.py
-Description:  
+Description:  Program to generate forecast on a dataset using 
+              the prophet forecasting tool.
 Made by:      Eirik Johannes Ramstad
 Date:         03.09.2017
 """
@@ -11,14 +12,13 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt 
 
+# Functions to read csv and format dataframe into supported format
 
 def nordpool():
-    
     df = pd.read_csv('datasets/nordic_electricity_consumption_nordpool.csv', parse_dates=['Date'])
     
-    area = 'NO'
+    area = 'NO3'
 
-    # Keep only relevant columns and format to what prophet expects
     df = df[['Date',area]]
     df = df.rename(columns={'Date': 'ds', area: 'y'})
     df = df.head(1705)
@@ -51,26 +51,25 @@ def dataset2():
 
     return df
 
+# Select data
 df = nordpool()
 
 # Analyse data with prophet
 m = Prophet(weekly_seasonality=True, yearly_seasonality=True)
 m.fit(df)
 
-# Make dataframe to hold forecast
-future = m.make_future_dataframe(periods=730, freq='d')
-future.tail()
-
+# Make dataframe and predict future values
+future = m.make_future_dataframe(periods=730, freq='D')
 forecast = m.predict(future)
-forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail()
-
-#print(forecast)
 
 # Plot Results
 m.plot(forecast)
+plt.title("Daily Electricity Consumption Forecast",fontsize=16)
+plt.ylabel("Electricty Consumption (MWh)",fontsize=12)
+plt.xlabel("Year",fontsize=12)
 plt.show()
 
-# Plot Components will show the trend, yearly seasonality, weekly seasonality, 
+# Plot trend, yearly seasonality and weekly seasonality
 m.plot_components(forecast)
 plt.show()
 
