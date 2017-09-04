@@ -11,6 +11,21 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt 
 
+
+def nordpool():
+    
+    df = pd.read_csv('datasets/nordic_electricity_consumption_nordpool.csv', parse_dates=['Date'])
+    
+    area = 'NO'
+
+    # Keep only relevant columns and format to what prophet expects
+    df = df[['Date',area]]
+    df = df.rename(columns={'Date': 'ds', area: 'y'})
+    df = df.head(1705)
+    
+    return df
+
+
 def dataset1():
     df = pd.read_csv('datasets/Apt1_2015.csv', parse_dates=['ds'])
 
@@ -36,14 +51,14 @@ def dataset2():
 
     return df
 
-df = dataset1()
+df = nordpool()
 
 # Analyse data with prophet
 m = Prophet(weekly_seasonality=True, yearly_seasonality=True)
 m.fit(df)
 
 # Make dataframe to hold forecast
-future = m.make_future_dataframe(periods=365, freq='d')
+future = m.make_future_dataframe(periods=730, freq='d')
 future.tail()
 
 forecast = m.predict(future)
