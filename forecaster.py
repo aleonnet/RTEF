@@ -15,6 +15,7 @@ import numpy
 import time
 import datetime
 
+
 # Global Variables
 polynomialfactor = 4
 arraysize = 5
@@ -33,7 +34,7 @@ def polynomial(newData):
     
     # Basic statistics
     error = prevforecast - y
-    print "Previous forecast: " + str(prevforecast) + " Actual: " + str(y) + " Error: " + str(error)
+    print("Previous forecast: " + str(prevforecast) + " Actual: " + str(y) + " Error: " + str(error))
 
     # Calculate polynomial of new dataset
     yarray = numpy.roll(yarray,-1)
@@ -50,7 +51,7 @@ def polynomial(newData):
     forecastTime = now + datetime.timedelta(0,interval)
     forecastTimeStr = forecastTime.strftime("%d.%m.%Y %H:%M:%S")
 
-    print "New forecast: " + str(yforecast) + " At time: " + forecastTimeStr
+    print("New forecast: " + str(yforecast) + " At time: " + forecastTimeStr)
  
     forecastData['timestamp'] = forecastTimeStr
     forecastData['value'] = yforecast
@@ -68,15 +69,16 @@ def on_connect(self, client, userdata, rc):
 
 # Callback for PUBLISH message from server
 def on_message(client, userdata, msg):
-    print "--------------------------------------------------------"
+    print("--------------------------------------------------------")
     print("Received data: " + msg.topic + " " + str(msg.payload))
 
     # Format data
-    payload = json.loads(msg.payload)
+    payload = json.loads(msg.payload.decode('utf-8'))
 
     # Calculate forecast
-    payload = polynomial(payload)
-    
+    #payload = polynomial(payload)
+    payload = prophet(payload)    
+
     # Reformat data to json
     forecast = json.dumps(payload)
 

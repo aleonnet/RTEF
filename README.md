@@ -7,9 +7,9 @@ The purpose of this application is to forecast future energy consumption based o
 
 ### How does it work?
 
-The forecaster listens to a specified MQTT topic, calculates a forecast based on the received data and publishes its forecast to a second MQTT topic. The forecast is calculated based on previous data on top of a model generated using the timeseries forecasting tool [Prophet](https://github.com/facebookincubator/prophet) using 4.5 years worth of norwegian electricity consumption data taken from [Nordpool](https//www.nordpoolspot.com). A further explanation of the mathematics behind the forecasting can be found [here](). 
+The forecaster listens to a specified MQTT topic, calculates a forecast based on the received data and publishes its forecast to a second MQTT topic. The method to determine the forecast is still under development. The suitability of using the forecasting tool Prophet was evaluated in the Jupyter notebook found [here](https://github.com/eijora/RTEF/blob/master/notebooks/Prophet%20Forecasting%20on%20Nordic%20Electricity%20Consumption%20Data.ipynb) 
 
-The publisher has been made to simulate an electricity meter. It takes datapoints from a dataset and publishes it to an MQTT topic at a given time interval. 
+The publisher has been made to simulate an electricity meter. It takes datapoints from a dataset and publishes it to an MQTT topic at a given time interval. Currently a dataset with daily electricity consumption data for Norway sourced from Nordpool is used.
 
 The incoming data from the electricity meter is formatted using json and consists of a timestamp and value field. The output data from the forecaster is also formatted using json and consists of the future timestamp and future value.
 
@@ -57,7 +57,7 @@ The publisher app can be used to test the forecasting application. The publisher
 ```
 $ python publisher.py
 ```
-A later release will include a function for evaluatating the acuracy of the forecasts to make it easier to determine the accuracy of the forecast and select the most suitable model for a given demand pattern.
+A later release will include a function for evaluatating the accuracy of the forecasts to make it easier to select the most suitable model for a given demand pattern.
 
 The dataset has been sourced from [Nordpool](http://www.nordpoolspot.com) and contains daily sums of electric power consumption across the Nordic region from January 2013 to September 2017. 
 

@@ -17,6 +17,7 @@ import pandas as pd
 
 
 df = pd.read_csv('datasets/nordic_electricity_consumption_nordpool.csv')#, parse_dates=['Date'])
+df = df.tail(976)
 
 for index, row in df.iterrows():
     
@@ -28,7 +29,7 @@ for index, row in df.iterrows():
     subprocess.check_output(["bash", '-c',command])
 
     print(row['Date'] + ' -- Data sent!')
-    time.sleep(1)
+    time.sleep(30)
 
 
 
